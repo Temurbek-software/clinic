@@ -8,8 +8,8 @@ import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.stereotype.Component;
 
 /**
- * @apiNote CLIENTGA QAYTARILADIGAN MESSAGE'LAR BILAN ISHLAYDIGAN SERVICE
- * @since 01.12.2021
+ * @apiNote SERVICE FOR RETURNING MSG TO CLIENTS
+ * @since 25.11.2022
  */
 
 @Component
@@ -23,8 +23,8 @@ public class MessageService {
     }
 
     /**
-     * KEY KELSA USHA KEYGA TEGISHLI BO'LGAN MESSAGE QAYTARADI. <br/>
-     * BU KEY-VALUENI oladigan joy <pre>/src/java/resources/messages</pre>
+     * IF KEY COMES, IT WILL GO BACK WITH MSG. <br/>
+     * PLACE WHERE TO TAKE KEY <pre>/src/java/resources/messages</pre>
      */
     public static String getMessage(String key) {
         try
@@ -35,17 +35,5 @@ public class MessageService {
         {
             return key;
         }
-    }
-
-    /**
-     * IKKITA KEY KELSA ULARNING MESSAGENI
-     * {@link String#format(String, Object...)} ORQALI BIRLASHTIRIB QAYTARADI <hr/>
-     * MASALAN: YANGI TADBIR MUVAFFAQIYATLI SAQLANDI, KLIENTGA MOS MESSAGE QAYTARISH KK. <br/>
-     * SHUNDA BU METODGA "SUCCESS_SAVE" VA "EVENT" KEYLARI KELSA.
-     * HAR IKKALA KEYNING VALUESINI {@link #getMessage(String)} DAN OLIB {@link String#format(String, Object...)}
-     * ORQALI BIRLASHTIRADI. SHUNDA QUYIDAGI MESSAGE HOSIL BO'LADI: <pre>Tadbir muvaffaqiyatli saqlandi!</pre>
-     */
-    private static String merge(String action, String sourceKey) {
-        return String.format(getMessage(action), getMessage(sourceKey));
     }
 }

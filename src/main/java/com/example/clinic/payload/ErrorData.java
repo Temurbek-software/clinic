@@ -10,13 +10,14 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ErrorData {
-    //USERGA BORADIGAN XABAR
+
+    //MSG TO USERS
     private String errorMsg;
 
-    //QAYSI FIELD XATO EKANLIGI
+    //WHICH FIELD HAS ERROR
     private String fieldName;
 
-    //XATOLIK KODI
+    //ERROR CODE
     private Integer errorCode;
 
 

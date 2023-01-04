@@ -110,7 +110,7 @@ public class ExceptionHelper {
     }
 
 
-    //METHOD XATO BO'LSA
+    //IF METHOD WRONG
     @ExceptionHandler(value = {HttpRequestMethodNotSupportedException.class})
     public ResponseEntity<ApiResult<ErrorData>> handleException() {
         return new ResponseEntity<>(
@@ -126,7 +126,7 @@ public class ExceptionHelper {
     }
 
 
-    //METHOD XATO BO'LSA
+    //METHOD DATA WRONG
     @ExceptionHandler(value = {HttpMediaTypeNotSupportedException.class})
     public ResponseEntity<ApiResult<ErrorData>> handleExceptionHttpMediaTypeNotSupported() {
         return new ResponseEntity<>(
@@ -171,16 +171,16 @@ public class ExceptionHelper {
                 HttpStatus.SERVICE_UNAVAILABLE);
     }
 
-    // FOYDALANUVCHI TOMONIDAN XATO SODIR BO'LGANDA
+    // IF SOMETHING WRONG WITH USER SIDE
     @ExceptionHandler(value = {RestException.class})
     public ResponseEntity<ApiResult<ErrorData>> handleException(RestException ex) {
         ex.printStackTrace();
-
-        //AGAR RESOURSE TOPILMAGANLIGI XATOSI BO'LSA CLIENTGA QAYSI TABLEDA NIMA TOPILMAGANLIGI HAQIDA XABAR QAYTADI
+        //IF THE ERROR IS RELATED TO NOT FOUND RESOURCE,
+        //THE MSG WILL RETURN IN WHICH TABLE  WHAT IT NOT FOUND
         if (ex.getFieldName() != null)
             return new ResponseEntity<>(ApiResult.errorResponse(ex.getUserMsg(),
                     ex.getErrorCode()), ex.getStatus());
-        //AKS HOLDA DOIMIY EXCEPTIONLAR ISHLAYVERADI
+        //ELSE PERMANENT EXCEPTIONS WORK
         if (ex.getError() != null)
             return new ResponseEntity<>(ApiResult.errorResponse(ex.getError()), ex.getStatus());
         return new ResponseEntity<>(ApiResult.errorResponse(ex.getUserMsg(), ex.getErrorCode() != null ? ex.getErrorCode() : ex.getStatus().value()), ex.getStatus());

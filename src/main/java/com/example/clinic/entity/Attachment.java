@@ -11,11 +11,22 @@ import javax.persistence.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "attachment")
 public class Attachment extends BaseEntity {
-    @Column(name = "content")
-    private String contentImage;
+
+    @Column(name = "imageName")
+    private String imageName;
+
     @Column(name = "comments")
     private String commented;
+
+    @Column(name = "typeOfImage")
+    private String typeOfImage;
+
+    @Lob
+    @Column(name = "content")
+    private byte[] contentImage;
+
     @ManyToOne(cascade = {
             CascadeType.REMOVE, CascadeType.PERSIST, CascadeType.MERGE
     }, fetch = FetchType.LAZY)
